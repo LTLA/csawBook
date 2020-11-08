@@ -1,0 +1,24 @@
+book_filename: "csawBook"
+pagetitle: "The csaw book" 
+delete_merged_file: true
+new_session: true
+language:
+  ui:
+    chapter_name: "Chapter "
+output_dir: "docs"
+rmd_files: ["index.Rmd",
+    # Part 1, counting:
+    "window-counts.Rmd",
+    "other-counts.Rmd",
+    # Part 2, preprocessing:
+    "filtering.Rmd",
+    "normalization.Rmd",
+    # Part 3, modelling:
+    "modelling.Rmd",
+    "correction.Rmd",
+    # Part 4, post-processing:
+    "postprocess.Rmd",
+    # Part 5, workflows:
+    # Part 6, other crap:
+    "about-the-contributors.Rmd",
+    "bibliography.Rmd"]

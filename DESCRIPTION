@@ -1,0 +1,27 @@
+Package: csawBook
+Version: 0.99.0
+Date: 2020-10-07
+Title: The Book of csaw 
+Authors@R: person("Aaron", "Lun", role=c("aut", "cre"), email =
+    "infinite.monkeys.with.keyboards@gmail.com")
+Depends: csaw,
+    chipseqDBData,
+    edgeR,
+    TxDb.Mmusculus.UCSC.mm10.knownGene,
+    org.Mm.eg.db,
+    rtracklayer,
+    Rsamtools,
+    Gviz,
+    knitr,
+    BiocStyle
+biocViews: Workflow, EpigeneticsWorkflow
+Description: 
+    Describes how to use the csaw package to detect differentially bound regions in ChIP-seq data. 
+    This provides instructions on how to read in BAM files to obtain a per-window count matrix, 
+    filtering to obtain high-abundance windows of interest, 
+    normalization of sample-specific biases, testing for differential binding, 
+    consolidation of per-window results to obtain per-region statistics,
+    and annotation and visualization of the DB results.
+License: GPL-3
+VignetteBuilder: knitr
+BiocType: Book

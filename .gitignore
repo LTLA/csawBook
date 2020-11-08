@@ -1,0 +1,7 @@
+*.bed
+*.tsv.gz
+*.html
+*.rds
+vignettes/book/_bookdown_files/
+vignettes/book/docs/
+

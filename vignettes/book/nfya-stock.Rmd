@@ -1,0 +1,49 @@
+```{r}
+library(rebook)
+chapterPreamble()
+```
+
+```{r loading-files}
+library(chipseqDBData)
+tf.data <- NFYAData()
+tf.data
+bam.files <- head(tf.data$Path, -1) # skip the input.
+bam.files
+```
+
+```{r counting-windows}
+library(csaw)
+frag.len <- 110
+win.width <- 10
+param <- readParam(minq=20)
+data <- windowCounts(bam.files, ext=frag.len, width=win.width, param=param)
+```
+
+```{r filtering}
+binned <- windowCounts(bam.files, bin=10000, param=param)
+fstats <- filterWindowsGlobal(data, binned)
+filtered.data <- data[fstats$filter > log2(5),]
+```
+
+```{r normalization}
+filtered.data <- normFactors(binned, se.out=filtered.data)
+```
+
+```{r modelling}
+cell.type <- sub("NF-YA ([^ ]+) .*", "\\1", head(tf.data$Description, -1))
+design <- model.matrix(~cell.type)
+colnames(design) <- c("intercept", "cell.type")
+
+library(edgeR)
+y <- asDGEList(filtered.data)
+y <- estimateDisp(y, design)
+fit <- glmQLFit(y, design, robust=TRUE)
+res <- glmQLFTest(fit, coef="cell.type")
+
+rowData(filtered.data) <- cbind(rowData(filtered.data), res$table)
+```
+
+```{r merging}
+merged <- mergeResults(filtered.data, tol=1000, 
+    merge.args=list(max.width=5000))
+```
