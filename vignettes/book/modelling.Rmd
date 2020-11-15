@@ -91,7 +91,7 @@ Plot such as those in Figure \@ref(fig:nfya-disp-plot) can also be used to decid
 Sudden irregulaties may be indicative of an underlying structure in the data which cannot be modelled with the mean-dispersion trend. 
 Discrete patterns in the raw dispersions are indicative of low counts and suggest that more aggressive filtering is required.
 
-```{r nfya-disp-plot, fig.wide=TRUE, fig.asp=0.5, fig.cap="Fitted trend in the NB dispersion (left) or QL dispersion (right) as a function of the average abundance for each window. For the NB dispersion, the square root is shown as the biological coefficient of variation. For the QL dispersion, the shrunken estimate is also shown for each window."}
+```{r nfya-disp-plot, fig.width=10, fig.height=6, fig.cap="Fitted trend in the NB dispersion (left) or QL dispersion (right) as a function of the average abundance for each window. For the NB dispersion, the square root is shown as the biological coefficient of variation. For the QL dispersion, the shrunken estimate is also shown for each window."}
 par(mfrow=c(1,2))
 o <- order(y$AveLogCPM)
 plot(y$AveLogCPM[o], sqrt(y$trended.dispersion[o]), type="l", lwd=2,
@@ -100,10 +100,10 @@ plot(y$AveLogCPM[o], sqrt(y$trended.dispersion[o]), type="l", lwd=2,
 plotQLDisp(fit)
 ```
 
-A strong trend may also be observed where the NB dispersion drops sharply with increasing average abundance.
-This is due to the disproportionate impact of artifacts such as mapping errors and PCR duplicates at low counts. 
-It is difficult to accurately fit an empirical curve to these strong trends.  
-As a consequence, the dispersions at high abundances may be overestimated. 
+For most sequencing count data, we expect to see a decreasing trend that plateaus with increasing average abundance.
+This reflects the greater reliability of large counts, where the effects of stochasticity and technical artifacts (e.g., mapping errors, PCR duplicates) are averaged out.
+In some cases, a strong trend may also be observed where the NB dispersion drops sharply with increasing average abundance.
+It is difficult to accurately fit an empirical curve to these strong trends, and as a consequence, the dispersions at high abundances may be overestimated. 
 Filtering of low-abundance regions (as described in Chapter \@ref(chap:filter)) provides some protection by removing the strongest part of the trend.
 This has an additional benefit of removing those tests that have low power due to the magnitude of the dispersions.
 
@@ -119,6 +119,10 @@ plot(yo$AveLogCPM[oo], sqrt(yo$trended.dispersion[oo]), type="l", lwd=2,
 lines(y$AveLogCPM[o], sqrt(y$trended[o]), lwd=2, col="grey")
 legend("topright", c("raw", "filtered"), col=c("black", "grey"), lwd=2)
 ```
+
+Note that only the trended dispersion will be used in the downstream steps -- the common and tagwise values are only shown in Figure \@ref(fig:nfya-disp-plot) for diagnostic purposes.
+Specifically, the common BCV provides an overall measure of the variability in the data set, averaged across all windows.
+The tagwise BCVs should also be dispersed above and below the fitted trend, indicating that the fit was successful.
 
 ### Modelling variable dispersions between windows
 

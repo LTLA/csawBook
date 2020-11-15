@@ -19,6 +19,9 @@ rmd_files: ["index.Rmd",
     # Part 4, post-processing:
     "postprocess.Rmd",
     # Part 5, workflows:
+    "h3k9ac.Rmd",
+    "cbp.Rmd",
+    "h3k27me3.Rmd",
     # Part 6, other crap:
     "about-the-contributors.Rmd",
     "bibliography.Rmd"]

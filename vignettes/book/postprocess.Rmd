@@ -7,7 +7,7 @@ library(rebook)
 chapterPreamble()
 ```
 
-## Adding gene-based annotation
+## Adding gene-based annotation {#sec:detail-ranges}
 
 Annotation can be added to a given set of regions using the `detailRanges()` function. 
 This will identify overlaps between the regions and annotated genomic features such as exons, introns and promoters. 

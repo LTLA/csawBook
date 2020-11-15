@@ -23,15 +23,36 @@ url: "`r .gh_url`"
 rebook::chapterPreamble()
 ```
 
-## Scope 
+## Introduction
 
-This book describes the use of the `r Biocpkg("csaw")` Bioconductor package to detect differential binding (DB) in ChIP-seq experiments.
-`r Biocpkg("csaw")` uses sliding windows to identify significant changes in binding patterns for transcription factors (TFs) or histone marks across different biological conditions [@lun2016csaw].
-However, it can also be applied to any sequencing technique where reads represent coverage of enriched genomic regions.
+Chromatin immunoprecipitation with sequencing (ChIP-seq) is a widely used technique for identifying the genomic binding sites of a target protein.
+Conventional analyses of ChIP-seq data aim to detect absolute binding (i.e., the presence or absence of a binding site) based on peaks in the read coverage.
+An alternative analysis strategy is to detect of changes in the binding profile between conditions [@rossinnes2012differential; @pal2013].
+These differential binding (DB) analyses involve counting reads into genomic intervals and testing those counts for significant differences between conditions.
+This defines a set of putative DB regions for further examination.
+DB analyses are statistically easier to perform than their conventional counterparts,
+as the effect of genomic biases is largely mitigated when counts for different libraries are compared at the same genomic region.
+DB regions may also be more relevant as the change in binding can be associated with the biological difference between conditions.
+
+This book describes the use of the `r Biocpkg("csaw")` Bioconductor package to detect differential binding (DB) in ChIP-seq experiments with sliding windows [@lun2016csaw].
+In these analyses, we detect and summarize DB regions between conditions in a *de novo* manner, i.e., without making any prior assumptions about the location or width of bound regions.
+We demonstrate on data from a variety of real studies focusing on changes in transcription factor binding and histone mark enrichment. 
+Our aim is to facilitate the practical implementation of window-based DB analyses by providing detailed code and expected output.
+The code here can be adapted to any dataset with multiple experimental conditions and with multiple biological samples within one or more of the conditions;
+it is similarly straightforward to accommodate batch effects, covariates and additional experimental factors.
+Indeed, though the book focuses on ChIP-seq, the same software can be adapted to data from any sequencing technique where reads represent coverage of enriched genomic regions.
+
+## How to read this book
 
 The descriptions in this book explore the theoretical and practical motivations behind each step of a `r Biocpkg("csaw")` analysis.
-While all users are welcome to read it from start to finish, new users may prefer to examine the case studies presented in the later sections [@lun2015from], which provides the important information in a more concise format.
+While all users are welcome to read it from start to finish, new users may prefer to examine the case studies presented in the later sections [@lun2015from], 
+which provides the important information in a more concise format.
 Experienced users (or those looking for some nighttime reading!) are more likely to benefit from the in-depth discussions in this document.
+
+All of the workflows described here start from sorted and indexed BAM files in the `r Biocpkg("chipseqDBData")` package.
+For application to user-specified data, the raw read sequences have to be aligned to the appropriate reference genome beforehand.
+Most aligners can be used for this purpose, but we have used `r Biocpkg("Rsubread")` [@liao2013] due to the convenience of its R interface.
+It is also recommended to mark duplicate reads using tools like `Picard` prior to starting the workflow.
 
 The statistical methods described here are based upon those in the `r Biocpkg("edgeR")` package [@robinson2010]. 
 Knowledge of `r Biocpkg("edgeR")` is useful but not a prerequesite for reading this guide.
@@ -49,7 +70,7 @@ Other questions about how to use `r Biocpkg("csaw")` are best sent to the [Bioco
 Please send requests for general assistance and advice to the support site, rather than to the individual authors. 
 Users posting to the support site for the first time may find it helpful to read the [posting guide](http://www.bioconductor.org/help/support/posting-guide).
 
-## How to cite this package
+## How to cite this book
 
 Most users of `r Biocpkg("csaw")` should cite the following in any publications:
 

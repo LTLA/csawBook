@@ -13,3 +13,16 @@ For twelve years, you have been asking: Who is Aaron Lun?
 
 Well, he's this guy [here](https://github.com/LTLA). 
 There, I spared you 60 boring pages of philosophical rambling.
+
+### *Gordon Smyth* {-}
+
+Check out this [silver fox](https://www.wehi.edu.au/people/gordon-smyth).
+
+## Grant information {-}
+
+National Health and Medical Research Council (Program Grant 1054618 to G.K.S., Fellowship to G.K.S.);
+Victorian State Government Operational Infrastructure Support; Australian Government NHMRC IRIIS.
+
+## Acknowledgements {-}
+
+The authors would like to thank Prof. Stephen Nutt for his valuable insights on B-cell biology.

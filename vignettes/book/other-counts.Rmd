@@ -5,7 +5,7 @@ library(rebook)
 chapterPreamble()
 ```
 
-## Avoiding problematic genomic regions
+## Avoiding problematic genomic regions {#sec:problematic-regions}
 
 Read extraction and counting can be restricted to particular chromosomes by specifying the names of the chromosomes of interest in `restrict`. 
 This avoids the need to count reads on unassigned contigs or uninteresting chromosomes, e.g., the mitochondrial genome for ChIP-seq studies targeting nuclear factors. 
@@ -18,7 +18,9 @@ restrict.param <- readParam(restrict=c("chr1", "chr10", "chrX"))
 
 Reads lying in certain regions can also be removed by specifying the coordinates of those regions in `discard`. 
 This is intended to remove reads that are wholly aligned within known repeat regions but were not removed by the `minq` filter. 
-Repeats are problematic as changes in repeat copy number or accessibility between conditions can lead to spurious DB. 
+Repeats are problematic as different repeat units in an actual genome are usually reported as a single unit in the genome build.
+Alignment of all (non-specifically immunoprecipitated) reads from the former will result in artificially high coverage of the latter.
+More importantly, any changes in repeat copy number or accessibility between conditions can lead to spurious DB at this single unit. 
 Removal of reads within repeat regions can avoid detection of these irrelevant differences. 
 
 ```{r}
@@ -27,10 +29,15 @@ discard.param <- readParam(discard=repeats)
 ```
 
 Coordinates of annotated repeats can be obtained from several different sources.
-A curated blacklist of problematic regions is available from the [ENCODE project](https://sites.google.com/site/anshulkundaje/projects/blacklists) [@dunham2012] for various organisms. 
+
+- A curated blacklist of problematic regions is available from the [ENCODE project](https://sites.google.com/site/anshulkundaje/projects/blacklists) [@dunham2012] for various organisms. 
 This list is constructed empirically from the ENCODE datasets and includes obvious offenders like telomeres, microsatellites and some rDNA genes.
-Alternatively, repeats can be predicted from the genome sequence using software like RepeatMasker.
+We generally prefer to use the ENCODE blacklist most applications where blacklisting is necessary.
+- Alternatively, repeats can be predicted from the genome sequence using software like RepeatMasker.
 These calls are available from the UCSC website (e.g., for [mouse](https://hgdownload.soe.ucsc.edu/goldenPath/mm10/bigZips/chromOut.tar.gz)) or they can be extracted from an appropriate masked `BSgenome` object. 
+This contains a greater number of problematic regions (especially microsatellites) compared to the ENCODE blacklist, though genuine DB sites may also be removed.
+- If negative control samples are available, they can be used to empirically identify problematic regions with the `r Biocpkg("GreyListChIP")` package.
+These regions should be ignored as they have high coverage in the controls and are unlikely to be genuine binding sites.
 
 Using `discard` is more appropriate than simply ignoring windows that overlap the repeat regions.
 For example, a large window might contain both repeat and non-repeat regions. 
@@ -43,10 +50,8 @@ For example, many more repeats are called by RepeatMasker than are present in th
 
 The `spacing` parameter controls the distance between adjacent windows in the genome.
 By default, this is set to 50 bp, i.e., sliding windows are shifted 50 bp forward at each step.
-Using a higher value will reduce computational work as fewer features need to be counted.
-This may be useful when machine memory is limited. 
-Of course, spatial resolution is lost with larger spacings.
-Adjacent positions are not counted and thus cannot be distinguished. 
+Using a higher value will reduce computational work as fewer features need to be counted, and may be useful when machine memory is limited. 
+Of course, spatial resolution is lost with larger spacings as adjacent positions are not counted and thus cannot be distinguished. 
 
 ```{r, echo=FALSE, results="asis"}
 extractCached("nfya-stock.Rmd", "counting-windows", c("bam.files", "frag.len", "win.width", "param"))
@@ -57,11 +62,10 @@ demo <- windowCounts(bam.files, spacing=100, ext=frag.len, width=win.width, para
 head(rowRanges(demo))
 ```
 
-For analyses with large windows, we suggest increasing the `spacing` to a fraction of the specified `width`. 
+While the default is usually satisfactory, users can improve efficiency by increasing the `spacing` to a value up to `(width + ext)/2`. 
 This reduces the computational work by decreasing the number of windows and extracted counts. 
 Any loss in spatial resolution due to a larger spacing interval is negligible compared to that already lost by using a large window size. 
-Conversely, `spacing` should not be larger than `ext/2` for analyses with small windows.
-This ensures that a narrow binding site will not be overlooked if it falls between two windows.
+The suggested upper bound ensures that a narrow binding site will not be overlooked if it falls between two windows.
 
 Windows that are overlapped by few fragments are filtered out based on the `filter` argument. 
 A window is removed if the sum of counts across all libraries is below `filter`.
@@ -134,7 +138,7 @@ demo$totals
 
 ## Other counting strategies
 
-### Assigning reads into bins
+### Assigning reads into bins {#sec:binning}
 
 Setting `bin=TRUE` will direct `windowCounts()` to count reads into contiguous bins across the genome.
 Here, `spacing` is set to `width` such that each window forms a bin.

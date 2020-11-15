@@ -1,6 +1,6 @@
 Package: csawBook
-Version: 0.99.1
-Date: 2020-10-09
+Version: 0.99.2
+Date: 2020-10-15
 Title: The Book of csaw 
 Authors@R: person("Aaron", "Lun", role=c("aut", "cre"), email =
     "infinite.monkeys.with.keyboards@gmail.com")
@@ -16,7 +16,8 @@ Depends:
     knitr,
     BiocStyle,
     statmod,
-    rebook
+    rebook,
+    ChIPpeakAnno
 biocViews: Workflow, EpigeneticsWorkflow
 Description: 
     Describes how to use the csaw package to detect differentially bound regions in ChIP-seq data. 
