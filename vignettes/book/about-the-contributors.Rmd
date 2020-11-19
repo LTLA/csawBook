@@ -15,6 +15,10 @@ Me.
 
 My PhD supervisor.
 
+### Other entities {-}
+
+Aliaksei Holik (Walter and Eliza Hall Institute for Medical Research), who provided the raw materials for the H3K27me3 workflow.
+
 ## Grant information {-}
 
 National Health and Medical Research Council (Program Grant 1054618 to G.K.S., Fellowship to G.K.S.);
