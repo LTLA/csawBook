@@ -79,10 +79,12 @@ blacklist
 ```
 
 We set the minimum mapping quality score to 10 to remove poorly or non-uniquely aligned reads.
+We also restrict ourselves to the standard chromosomes.
 
 ```{r}
 library(csaw)
-param <- readParam(minq=10, discard=blacklist)
+param <- readParam(minq=10, discard=blacklist,
+    restrict=paste0("chr", c(1:19, "X", "Y")))
 param
 ```
 
