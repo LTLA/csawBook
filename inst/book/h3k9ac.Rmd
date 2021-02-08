@@ -260,7 +260,7 @@ summary(fit$df.prior)
 ```
 
 Also note the use of `robust=TRUE` in the `glmQLFit()` call, which reduces the sensitivity of the EB procedures to outlier variances.
-This is particularly noticeable in Figure \@ref(fig:qlplot) with highly variable windows that (correctly) do not get squeezed towards the trend. 
+This is particularly noticeable in Figure \@ref(fig:h3k9ac-qlplot) with highly variable windows that (correctly) do not get squeezed towards the trend. 
 
 ### Examining the data with MDS plots
 
