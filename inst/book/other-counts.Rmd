@@ -71,7 +71,7 @@ Windows that are overlapped by few fragments are filtered out based on the `filt
 A window is removed if the sum of counts across all libraries is below `filter`.
 This improves memory efficiency by discarding the majority of low-abundance windows corresponding to uninteresting background regions. 
 The default value of the filter threshold is 10, though it can be raised to reduce memory usage for large libraries.
-More sophisticated filtering is recommended and should be applied later (see Chapter~\ref{chap:filter}).
+More sophisticated filtering is recommended and should be applied later (see Chapter~\@ref(chap-filter)).
 
 ```{r}
 demo <- windowCounts(bam.files, ext=frag.len, width=win.width, 
