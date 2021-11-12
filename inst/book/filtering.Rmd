@@ -1,6 +1,6 @@
 # (PART) Pre-processing the counts {-}
 
-# Filtering out uninteresting windows {#chap:filter}
+# Filtering out uninteresting windows {#chap-filtering}
 
 ```{r, echo=FALSE, results='asis'}
 library(rebook)

@@ -62,7 +62,7 @@ merged$regions
 
 If many adjacent windows are present, very large clusters may be formed that are difficult to interpret. 
 We perform a simple check below to determine whether most clusters are of an acceptable size. 
-Huge clusters indicate that more aggressive filtering from Chapter \@ref(chap:filter) is required.  
+Huge clusters indicate that more aggressive filtering from Chapter \@ref(chap-filter) is required.  
 This mitigates chaining effects by reducing the density of windows in the genome.
 
 <!--
@@ -223,7 +223,7 @@ names(broad.res)
 
 Repeating the analysis with different window sizes may uncover new DB events at different resolutions.
 Multiple sets of DB results are integrated by clustering adjacent windows together (even if they differ in size) and combining $p$-values within each of the resulting clusters.
-The example below uses the H3 acetylation data from Chapter \@ref(#chap:norm).
+The example below uses the H3 acetylation data from Chapter \@ref(chap-norm).
 Some filtering is performed to avoid excessive chaining in this demonstration.
 Corresponding tables of DB results should also be obtained -- for brevity, mock results are used here.
 
@@ -315,7 +315,7 @@ tabbroad.w <- combineOverlaps(olap, rowData(filtered.data), o.weight=broad.weigh
 
 ### Filtering after testing but before correction
 
-Most of the filters in Chapter~\ref{chap:filter} are applied before the statistical analysis.
+Most of the filters in Chapter~\@ref(chap-filter) are applied before the statistical analysis.
 However, some of the approaches may be too aggressive, e.g., filtering to retain only local maxima or based on pre-defined regions.
 In such cases, it may be preferable to initially apply one of the other, milder filters.
 This ensures that sufficient windows are retained for stable normalization and/or EB shrinkage.

@@ -1,6 +1,6 @@
 # (PART) Statistical modelling {-}
 
-# Testing for per-window differences {#chap:stats}
+# Testing for per-window differences {#chap-stats}
 
 ```{r, echo=FALSE, results="asis"}
 library(rebook)
@@ -22,7 +22,7 @@ The choice of `r Biocpkg("edgeR")` is primarily motivated by its performance rel
 ## Setting up for `r Biocpkg("edgeR")`
 
 A `DGEList` object is first constructed from the `SummarizedExperiment` contaiing our filtered count matrix.
-If normalization factors or offsets are present in the `RangedSummarizedExperiment` object -- see Chapter~\@ref(chap:norm) -- they will automatically be inserted into the `DGEList`.
+If normalization factors or offsets are present in the `RangedSummarizedExperiment` object -- see Chapter~\@ref(chap-norm) -- they will automatically be inserted into the `DGEList`.
 Otherwise, they can be manually passed to the `asDGEList()` function.
 If offsets are available, they will generally override the normalization factors in the downstream `r Biocpkg("edgeR")` analysis.
 
@@ -104,7 +104,7 @@ For most sequencing count data, we expect to see a decreasing trend that plateau
 This reflects the greater reliability of large counts, where the effects of stochasticity and technical artifacts (e.g., mapping errors, PCR duplicates) are averaged out.
 In some cases, a strong trend may also be observed where the NB dispersion drops sharply with increasing average abundance.
 It is difficult to accurately fit an empirical curve to these strong trends, and as a consequence, the dispersions at high abundances may be overestimated. 
-Filtering of low-abundance regions (as described in Chapter \@ref(chap:filter)) provides some protection by removing the strongest part of the trend.
+Filtering of low-abundance regions (as described in Chapter \@ref(chap-filter)) provides some protection by removing the strongest part of the trend.
 This has an additional benefit of removing those tests that have low power due to the magnitude of the dispersions.
 
 ```{r nfya-disp-rmcheck, fig.cap="Fitted trend in the NB dispersions before (black) and after (grey) removing low-abundance windows."}
