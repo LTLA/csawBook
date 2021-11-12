@@ -1,4 +1,4 @@
-# Normalizing for technical biases {#chap:norm}
+# Normalizing for technical biases {#chap-norm}
 
 ```{r, echo=FALSE, results='asis'}
 library(rebook)
