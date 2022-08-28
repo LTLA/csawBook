@@ -22,7 +22,7 @@ fig:cbp-bcvplot,cbp-wild-type-versus-knock-out.html,10.3
 fig:cbp-qlplot,cbp-wild-type-versus-knock-out.html,10.4
 fig:cbp-mdsplot,cbp-wild-type-versus-knock-out.html,10.5
 fig:cbp-tfplot,cbp-wild-type-versus-knock-out.html,10.6
-chap:filter,chap-filter.html,4
+chap-filter,chap-filter.html,4
 overview,chap-filter.html,4.1
 by-count-size,chap-filter.html,4.2
 by-proportion,chap-filter.html,4.3
@@ -36,7 +36,7 @@ some-final-comments-about-filtering,chap-filter.html,4.8
 fig:filter-global-dist,chap-filter.html,4.1
 fig:filter-local-dist,chap-filter.html,4.2
 fig:filter-control-dist,chap-filter.html,4.3
-chap:norm,chap-norm.html,5
+chap-norm,chap-norm.html,5
 overview-1,chap-norm.html,5.1
 sec:compo-norm,chap-norm.html,5.2
 using-the-tmm-method-on-binned-counts,chap-norm.html,5.2.1
@@ -53,7 +53,7 @@ a-word-on-other-biases,chap-norm.html,5.7
 fig:compo-norm-ma,chap-norm.html,5.1
 fig:eff-norm-ma,chap-norm.html,5.2
 fig:trend-norm-ma,chap-norm.html,5.3
-chap:stats,chap-stats.html,6
+chap-stats,chap-stats.html,6
 overview-2,chap-stats.html,6.1
 setting-up-for-placeholder,chap-stats.html,6.2
 estimating-the-dispersions,chap-stats.html,6.3
