@@ -10,7 +10,11 @@ jobs:
     container: bioconductor/bioconductor_docker:devel
     steps:
       - name: Check out repo
-        uses: actions/checkout@v3
+        run: | 
+          git clone https://oauth2:${{ secrets.GITHUB_TOKEN }}@github.com/LTLA/csawBook whee
+          cd whee
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
 
       - name: Set directories
         run: |
@@ -27,18 +31,15 @@ jobs:
         run: BiocManager::install('rebook')
 
       - name: Update DESCRIPTION and Makefile
+        working-directory: ./whee
         run: |
           rebook::updateDependencies("inst/book", path='DESCRIPTION')
           rebook::configureBook()
         shell: Rscript {0}
 
       - name: Committing to master
+        working-directory: ./whee
         run: |
-          rm -rf .git
-          git clone https://github.com/LTLA/csawBook whee
-          mv whee/.git .
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
           git add .
           git commit -m "Rebuilding sundries." || true
           git push
