@@ -10,15 +10,33 @@ jobs:
     container: bioconductor/bioconductor_docker:devel
     steps:
       - name: Check out repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+
+      - name: Set directories
+        run: |
+          echo "R_PKG_DIR=${R_HOME}/site-library" >> $GITHUB_ENV
+  
+      - name: Restore the site library
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.R_PKG_DIR }}
+          key: package-deps
+
+      - name: Install rebook
+        shell: Rscript {0}
+        run: BiocManager::install('rebook')
+
       - name: Update DESCRIPTION and Makefile
         run: |
-          BiocManager::install('LTLA/rebook')
           rebook::updateDependencies("inst/book", path='DESCRIPTION')
           rebook::configureBook()
         shell: Rscript {0}
+
       - name: Committing to master
-        run: | 
+        run: |
+          rm -rf .git
+          git clone https://github.com/LTLA/csawBook whee
+          mv whee/.git .
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
