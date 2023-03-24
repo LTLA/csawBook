@@ -10,15 +10,15 @@ chapterPreamble()
 ## Background
 
 The key step in the DB analysis is the manner in which reads are counted.
-The most obvious strategy is to count reads into pre-defined regions of interest, like promoters or gene bodies [@pal2013global].
+The most obvious strategy is to count reads into pre-defined regions of interest, like promoters or gene bodies [@pal2013].
 This is simple but will not capture changes outside of those regions.
 In contrast, *de novo* analyses do not depend on pre-specified regions, instead using empirically defined peaks or sliding windows for read counting.
 Peak-based methods are implemented in the `r Biocpkg("DiffBind")` and `r Biocpkg("DBChIP")` software packages [@rossinnes2012differential; @liang2012detecting],
-    which count reads into peak intervals that have been identified with software like MACS [@zhang2008macs].
+    which count reads into peak intervals that have been identified with software like MACS [@zhang2008].
 This requires some care to maintain statistical rigour as peaks are called with the same data used to test for DB.
 
 Alternatively, window-based approaches count reads into sliding windows across the genome.
-This is a more direct strategy that avoids problems with data re-use and can provide increased DB detection power [@lun2014denovo].
+This is a more direct strategy that avoids problems with data re-use and can provide increased DB detection power [@lun2014].
 In `r Biocpkg("csaw")`, we define a window as a fixed-width genomic interval and we count the number of fragments overlapping that window in each library.
 For single-end data, each fragment is imputed by directional extension of the read to the average fragment length (Figure \@ref(fig:extension-schematic)),
 while for paired-end data, the fragment is defined from the interval spanned by the paired reads.
