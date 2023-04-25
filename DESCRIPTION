@@ -1,5 +1,5 @@
 Package: csawBook
-Version: 1.8.0
+Version: 1.9.0
 Date: 2023-03-24
 Title: The Book of csaw 
 Authors@R: person("Aaron", "Lun", role=c("aut", "cre"), email =
