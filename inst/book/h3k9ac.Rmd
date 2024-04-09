@@ -463,7 +463,7 @@ Specifically, it represents an increase in H3K9ac marking at the *H2-Aa* locus i
 This is consistent with the expected biology -- H3K9ac is a mark of active gene expression and MHCII components are upregulated in mature B cells [@hoffman2002changes].
 
 ```{r}
-cur.region <- sorted.ranges[1]
+cur.region <- sorted.ranges[2]
 cur.region
 ```
 
