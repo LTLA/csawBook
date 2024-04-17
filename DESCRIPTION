@@ -1,6 +1,6 @@
 Package: csawBook
-Version: 1.11.1
-Date: 2024-04-08
+Version: 1.11.2
+Date: 2024-04-17
 Title: The Book of csaw 
 Authors@R: person("Aaron", "Lun", role=c("aut", "cre"), email =
     "infinite.monkeys.with.keyboards@gmail.com")
